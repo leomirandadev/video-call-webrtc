@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width">
+        <title>Peer-to-Peer Cue System --- Sender</title>
+        <link rel="stylesheet" href="src/style.css">
+    </head>
+    <body>
+        <div class="container">
+            
+            <button id="connect-button">Connect now</button>
+            <div id="status" class="status"></div>
+            
+            <div class="videos">
+                <div class="video">
+                    <video id="localVideoStream" autoplay muted></video>
+                    <p>You</p>
+                </div>
+                <div class="video">
+                    <video id="removeVideoStream" autoplay ></video>
+                    <p>Friend</p>
+                </div>
+            </div>
+
+            <div class="form">
+                <h3>CHAT REAL TIME</h3>
+                <div class="message" id="message"></div>
+
+                <textarea id="sendMessageBox" placeholder="Enter a message..." ></textarea>
+                <button type="button" id="sendButton">Send</button>
+
+            </div>
+    
+    
+
+        </div>
+
+        
+
+        <script src="https://cdn.jsdelivr.net/npm/peerjs@1.2.0/dist/peerjs.min.js"></script>
+        <script src="src/functions.js"></script>
+        <script type="text/javascript">
+            (function () {
+
+                var lastPeerId = null;
+                var peer = null; // own peer object
+                var conn = null;
+                var removeVideoStream = document.getElementById("removeVideoStream");
+                var localVideoStream = document.getElementById("localVideoStream");
+                
+                const idCall = findGetParameter("id");
+
+                var status = document.getElementById("status");
+                var message = document.getElementById("message");
+
+                var sendMessageBox = document.getElementById("sendMessageBox");
+                var sendButton = document.getElementById("sendButton");
+                
+                var connectButton = document.getElementById("connect-button");
+
+                /**
+                 * Create the Peer object for our end of the connection.
+                 *
+                 * Sets up callbacks that handle any events related to our
+                 * peer object.
+                 */
+                function initialize() {
+                    // liga camera
+                    createStremLocalVideo(localVideoStream)
+
+                    // Create own peer object with connection to shared PeerJS server
+                    peer = new Peer(null, {
+                        debug: 2
+                    });
+
+                    peer.on('open', function (id) {
+                        // Workaround for peer.reconnect deleting previous id
+                        if (peer.id === null) {
+                            console.log('Received null id from peer open');
+                            peer.id = lastPeerId;
+                        } else {
+                            lastPeerId = peer.id;
+                        }
+
+                        console.log('ID: ' + peer.id);
+                    });
+
+                    peer.on('disconnected', function () {
+                        status.innerHTML = "Connection lost. Please reconnect";
+                        console.log('Connection lost. Please reconnect');
+
+                        // Workaround for peer.reconnect deleting previous id
+                        peer.id = lastPeerId;
+                        peer._lastServerId = lastPeerId;
+                        peer.reconnect();
+                    });
+
+                    peer.on('close', function() {
+                        conn = null;
+                        status.innerHTML = "Connection destroyed. Please refresh";
+                        console.log('Connection destroyed');
+                    });
+
+                    peer.on('error', function (err) {
+                        console.log(err);
+                        alert('' + err);
+                    });
+                };
+
+                /**
+                 * Create the connection between the two Peers.
+                 *
+                 * Sets up callbacks that handle any events related to the
+                 * connection and data received on it.
+                 */
+                function join(idCall) {
+                    // Close old connection
+                    if (conn) {
+                        conn.close();
+                    }
+
+                    // Create connection to destination peer specified in the input field
+                    conn = peer.connect(idCall, {
+                        reliable: true
+                    });
+
+                    conn.on('open', function () {
+                        status.innerHTML = "Connected to: " + conn.peer;
+                        console.log("Connected to: " + conn.peer);
+                    });
+
+                    // recebe os dados
+                    conn.on('data', function (data) {
+                        addMessage("<span class=\"peerMsg\">Friend:</span> " + data);
+                        console.log("Receive new msg")
+                    });
+
+                    // fechar conexão
+                    conn.on('close', function () {
+                        status.innerHTML = "Connection closed";
+                    });
+
+
+                    
+                    var call = peer.call(idCall, localVideoStream.srcObject);
+                    call.answer(localVideoStream.srcObject);
+                    
+                    call.on('stream', function(remoteStream) {
+                        removeVideoStream.srcObject = remoteStream;
+                    });
+                };
+
+                function addMessage(msg) {
+                    message.innerHTML = formatMsg(msg, message.innerHTML)
+                };
+
+                // Listen for enter in message box
+                sendMessageBox.onkeypress = function (e) {
+                    var event = e || window.event;
+                    var char = event.which || event.keyCode;
+                    if (char == '13')
+                        sendButton.click();
+                };
+                // Send message
+                sendButton.onclick = function () {
+                    if (conn && conn.open) {
+                        var msg = sendMessageBox.value;
+                        sendMessageBox.value = "";
+
+                        conn.send(msg);
+                        addMessage("<span class=\"selfMsg\">You: </span> " + msg);
+                    } else {
+                        console.log('Connection is closed');
+                    }
+                };
+                // Start peer connection on click
+                connectButton.addEventListener('click', () => { join(idCall) });
+
+                // Since all our callbacks are setup, start the process of obtaining an ID
+                initialize();
+            })();
+        </script>
+    </body>
+</html>

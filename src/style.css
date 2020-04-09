@@ -1,0 +1,114 @@
+body {
+    background: #eee;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+    width: 50%;
+    left: 25%;
+    position: relative;
+    padding: 40px 20px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #cccccce1;
+    box-shadow: .5px .5px 10px rgba(0,0,0,0.1);
+    margin-top: 30px;
+}
+.form {
+    margin-bottom: 20px;
+}
+.form textarea {
+    padding: 10px;
+    width: 100%;
+    border-radius: 2px;
+    border: 1px solid #e4e4e4;
+}
+.form  button {
+    padding: 7px 20px;
+    background: #39979a;
+    color: #fff;
+    border: 1px solid #17a6ab;
+    border-radius: 2px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.form button:hover {
+    background:#40b1b5;
+}
+
+#connect-button {
+    font-size: 20px;
+    padding: 7px 20px;
+    background: #95d4d6;
+    color: #fff;
+    border: 1px solid #7bd1d4;
+    border-radius: 2px;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#connect-button:hover {
+    background:#40b1b5;
+}
+
+@media(max-width: 900px) {
+    .container {
+        width: 100%;
+        left: 10px;
+    }
+}
+
+.videos {
+    display: inline-flex;
+    margin-bottom:20px
+}
+.video {
+    border: 1px solid #ddd;
+    padding: 20px;
+    display: block;
+    width: 40%;
+    margin:5%;
+}
+.video video {
+    width: 100%;
+}
+.message {
+    height: 130px;
+    overflow-y: auto;
+    width: 100%;
+    border: 1px solid #eee;
+    margin-bottom:10px;
+    padding: 10px;
+}
+
+.message p {
+    margin-bottom: 10px;
+}
+
+.msg-time {
+    font-size: 12px;
+    padding: 3px 9px;
+    border: 1px solid #9c9c9c;
+    background: #aaa;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.status {
+    font-size: 12px;
+    padding: 3px 9px;
+    border: 1px solid #13b0ca;
+    background: #17c4e0;
+    color: #fff;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
