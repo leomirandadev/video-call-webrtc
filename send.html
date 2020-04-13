@@ -8,37 +8,36 @@
     </head>
     <body>
         <div class="container">
-            
-            <button id="connect-button">Connect now</button>
-            <div id="status" class="status"></div>
-            
-            <div class="videos">
-                <div class="video">
-                    <video id="localVideoStream" autoplay muted></video>
-                    <p>You</p>
-                </div>
-                <div class="video">
-                    <video id="removeVideoStream" autoplay ></video>
-                    <p>Friend</p>
+
+            <div class="flex-box">
+                <button id="connect-button">Connect now</button>
+                <div id="status" class="status"></div>
+                
+                <div class="videos">
+                    <div class="remote">
+                        <video id="removeVideoStream" autoplay ></video>
+                    </div>
+                    <div class="local">
+                        <video id="localVideoStream" autoplay muted></video>
+                    </div>
                 </div>
             </div>
 
-            <div class="form">
-                <h3>CHAT REAL TIME</h3>
-                <div class="message" id="message"></div>
-
-                <textarea id="sendMessageBox" placeholder="Enter a message..." ></textarea>
-                <button type="button" id="sendButton">Send</button>
-
+            <div class="flex-box">
+                <div class="form">
+                    <h3>CHAT REAL TIME</h3>
+                    <div class="message" id="message"></div>
+    
+                    <textarea id="sendMessageBox" placeholder="Enter a message..." ></textarea>
+                    <button type="button" id="sendButton">Send</button>
+                </div>
             </div>
-    
-    
 
         </div>
 
         
 
-        <script src="https://cdn.jsdelivr.net/npm/peerjs@1.2.0/dist/peerjs.min.js"></script>
+        <script src="src/peerjs.min.js"></script>
         <script src="src/functions.js"></script>
         <script type="text/javascript">
             (function () {
@@ -155,13 +154,6 @@
                     message.innerHTML = formatMsg(msg, message.innerHTML)
                 };
 
-                // Listen for enter in message box
-                sendMessageBox.onkeypress = function (e) {
-                    var event = e || window.event;
-                    var char = event.which || event.keyCode;
-                    if (char == '13')
-                        sendButton.click();
-                };
                 // Send message
                 sendButton.onclick = function () {
                     if (conn && conn.open) {

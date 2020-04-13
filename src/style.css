@@ -3,15 +3,19 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 .container {
-    width: 50%;
-    left: 25%;
+    display: inline-flex;
+    width: 100%;
+}
+.flex-box {
     position: relative;
     padding: 40px 20px;
     background: #fff;
     border-radius: 10px;
     border: 1px solid #cccccce1;
-    box-shadow: .5px .5px 10px rgba(0,0,0,0.1);
+    box-shadow: 0.5px 0.5px 10px rgba(0,0,0,0.1);
     margin-top: 30px;
+    flex: 1;
+    margin: 20px;
 }
 .form {
     margin-bottom: 20px;
@@ -59,25 +63,27 @@ body {
 }
 
 .videos {
-    display: inline-flex;
+    display: block;
     margin-bottom:20px
 }
-.video {
-    border: 1px solid #ddd;
-    padding: 20px;
-    display: block;
-    width: 40%;
-    margin:5%;
-}
-.video video {
+.remote video{
     width: 100%;
 }
-.message {
+.local{
+    margin-top: -150px;
+    margin-left: 20px;
+}
+.local video{
     height: 130px;
+    border: 2px solid #FFF;
+}
+.message {
+    height: 300px;
     overflow-y: auto;
     width: 100%;
     border: 1px solid #eee;
-    margin-bottom:10px;
+    margin-top:20px;
+    margin-bottom:20px;
     padding: 10px;
 }
 
