@@ -20,7 +20,7 @@ function formatMsg(msg, lastMsgs) {
 
 function createStremLocalVideo(localVideoStream) {
 
-    var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    var getUserMedia = navigator.mediaDevices.getUserMedia;
 
     getUserMedia({video: true, audio: true}, function(stream) {
         localVideoStream.srcObject = stream
