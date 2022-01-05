@@ -20,9 +20,9 @@ function formatMsg(msg, lastMsgs) {
 
 function createStremLocalVideo(localVideoStream) {
 
-    var getUserMedia = navigator.mediaDevices.getUserMedia;
+    var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-    getUserMedia({video: {facingMode: { exact: "environment" }}, audio: true}, function(stream) {
+    getUserMedia({video: true, audio: true}, function(stream) {
         localVideoStream.srcObject = stream
     }, function(err) {
         console.log('Failed to get local stream' ,err);
