@@ -182,12 +182,13 @@
 
                 initialize("")
 
-                window.setTimeout(() => 
-                    navigator.mediaDevices.enumerateDevices().then((devices) => { alert(JSON.stringify(devices));devices.map(device => {
-                        if (device.kind === "videoinput") {
-                            listExactCamera.push(device.deviceId);
-                        }
-                    })}).then(() => initialize(listExactCamera[indexExactCamera]))
+                window.setTimeout(async () => {
+                    listExactCamera = await navigator.mediaDevices.enumerateDevices().then((devices) => { alert(JSON.stringify(devices));devices.map(device => {
+                           if (device.kind === "videoinput") {
+                               listExactCamera.push(device.deviceId);
+                           }
+                       })}).then(() => listExactCamera)
+                }
                 , 2000)
 
 
