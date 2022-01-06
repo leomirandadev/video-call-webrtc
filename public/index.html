@@ -180,10 +180,11 @@
 
                 document.getElementById("change-camera").addEventListener('click', changeCamera);
 
+                initialize("")
+
                 navigator.mediaDevices.enumerateDevices().then((devices) => { alert(JSON.stringify(devices));devices.map(device => {
                     if (device.kind === "videoinput") {
                         listExactCamera.push(device.deviceId);
-                        
                     }
                 })}).then(() => initialize(listExactCamera[indexExactCamera]));
 
