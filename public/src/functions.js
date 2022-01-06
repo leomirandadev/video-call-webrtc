@@ -27,7 +27,7 @@ function createStremLocalVideo(localVideoStream, exactCamera) {
     let videoConfig = true
     if (exactCamera !== "") {
         videoConfig = {
-            facingMode: {
+            deviceId: {
                 exact: exactCamera
             }
         }
