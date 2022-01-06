@@ -42,23 +42,22 @@
         <script src="src/peerjs.min.js"></script>
         <script src="src/functions.js"></script>
         <script type="text/javascript">
-            (function () {
                 let indexExactCamera = 0
-                var lastPeerId = null;
-                var peer = null; // own peer object
-                var conn = null;
-                var removeVideoStream = document.getElementById("removeVideoStream");
-                var localVideoStream = document.getElementById("localVideoStream");
+                let lastPeerId = null;
+                let peer = null; // own peer object
+                let conn = null;
+                const removeVideoStream = document.getElementById("removeVideoStream");
+                const localVideoStream = document.getElementById("localVideoStream");
                 
                 const idCall = findGetParameter("id");
 
-                var status = document.getElementById("status");
-                var message = document.getElementById("message");
+                const status = document.getElementById("status");
+                const message = document.getElementById("message");
 
-                var sendMessageBox = document.getElementById("sendMessageBox");
-                var sendButton = document.getElementById("sendButton");
+                const sendMessageBox = document.getElementById("sendMessageBox");
+                const sendButton = document.getElementById("sendButton");
                 
-                var connectButton = document.getElementById("connect-button");
+                const connectButton = document.getElementById("connect-button");
 
                 /**
                  * Create the Peer object for our end of the connection.
@@ -192,7 +191,6 @@
                        })}).then(() => listExactCamera)
                 }, 2000)
 
-            })();            
         </script>
     </body>
 </html>
