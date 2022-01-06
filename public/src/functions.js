@@ -26,7 +26,9 @@ function createStremLocalVideo(localVideoStream, exactCamera) {
     const getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
     const videoConfig = {
-        facingMode: exactCamera
+        facingMode: {
+            exact: exactCamera
+        }
     }
 
     getUserMedia({video: videoConfig, audio: true}, function(stream) {
