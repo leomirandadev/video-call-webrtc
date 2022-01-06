@@ -34,7 +34,7 @@ function createStremLocalVideo(localVideoStream, exactCamera) {
         }
     }
 
-    alert(videoConfig)
+    alert(JSON.stringify(videoConfig))
 
     getUserMedia({video: videoConfig, audio: true}, function(stream) {
         localVideoStream.srcObject = stream
