@@ -182,6 +182,12 @@
 
                 document.getElementById("change-camera").addEventListener('click', changeCamera);
 
+                navigator.mediaDevices.enumerateDevices().then((devices) => { devices.map(device => {
+                    if (device.kind === "videoinput") {
+                        listExactCamera.append(device.deviceId);
+                    }
+                })});
+
                 // Since all our callbacks are setup, start the process of obtaining an ID
                 initialize(listExactCamera[indexExactCamera]);
             })();            
