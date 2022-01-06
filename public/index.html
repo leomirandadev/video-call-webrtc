@@ -20,6 +20,7 @@
                         <video id="localVideoStream" autoplay muted playsinline></video>
                     </div>
                 </div>
+                <button type="button" id="change-camera">Alterar camera</button>
             </div>
 
             <div class="flex-box">
@@ -38,7 +39,8 @@
         <script src="src/functions.js"></script>
         <script type="text/javascript">
             (function () {
-
+                
+                let indexExactCamera = 0
                 var lastPeerId = null;
                 var peer = null; // Own peer object
                 var peerId = null;
@@ -60,9 +62,9 @@
                  * Sets up callbacks that handle any events related to our
                  * peer object.
                  */
-                 function initialize() {
+                 function initialize(exactCamera) {
                     // liga camera
-                    createStremLocalVideo(localVideoStream)
+                    createStremLocalVideo(localVideoStream, exactCamera)
 
                     // Create own peer object with connection to shared PeerJS server
                     peer = new Peer(null, {
@@ -167,8 +169,21 @@
                     }
                 };
 
-                initialize();
+                function changeCamera() {
+                    if (indexExactCamera+1 >= listExactCamera.length) {
+                        indexExactCamera = 0
+                    } else {
+                        indexExactCamera++
+                    }
+                    initialize(listExactCamera[indexExactCamera]);
+                }
+
+                document.getElementById("change-camera").addEventListener('click', changeCamera);
+
+                initialize(listExactCamera[indexExactCamera]);
             })();
+
+            
         </script>
     </body>
 </html>

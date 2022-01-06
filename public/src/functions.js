@@ -18,14 +18,15 @@ function formatMsg(msg, lastMsgs) {
   return "<p><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  " + msg + lastMsgs + "</p>";
 };
 
-function createStremLocalVideo(localVideoStream) {
+const listExactCamera = ["enviroment", "user", "left", "right"]
 
+function createStremLocalVideo(localVideoStream, exactCamera) {
+
+    alert(exactCamera)
     const getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
     const videoConfig = {
-        facingMode: {
-            exact: 'environment'
-        }
+        facingMode: exactCamera
     }
 
     getUserMedia({video: videoConfig, audio: true}, function(stream) {

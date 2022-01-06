@@ -39,7 +39,7 @@ body {
     background:#40b1b5;
 }
 
-#connect-button {
+#connect-button, #change-camera {
     font-size: 20px;
     padding: 7px 20px;
     background: #95d4d6;
@@ -51,7 +51,7 @@ body {
     width: 100%;
 }
 
-#connect-button:hover {
+#connect-button:hover, #change-camera:hover {
     background:#40b1b5;
 }
 

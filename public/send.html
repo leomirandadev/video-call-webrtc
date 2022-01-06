@@ -10,7 +10,7 @@
         <div class="container">
 
             <div class="flex-box">
-                <button id="connect-button">Connect now</button>
+                <button id="connect-button">Entrar</button>
                 <div id="status" class="status"></div>
                 
                 <div class="videos">
@@ -21,6 +21,8 @@
                         <video id="localVideoStream" autoplay muted playsinline></video>
                     </div>
                 </div>
+
+                <button id="change-camera">Alterar camera</button>
             </div>
 
             <div class="flex-box">
@@ -41,7 +43,7 @@
         <script src="src/functions.js"></script>
         <script type="text/javascript">
             (function () {
-
+                let indexExactCamera = 0
                 var lastPeerId = null;
                 var peer = null; // own peer object
                 var conn = null;
@@ -64,9 +66,9 @@
                  * Sets up callbacks that handle any events related to our
                  * peer object.
                  */
-                function initialize() {
+                function initialize(exactCamera) {
                     // liga camera
-                    createStremLocalVideo(localVideoStream)
+                    createStremLocalVideo(localVideoStream, exactCamera)
 
                     // Create own peer object with connection to shared PeerJS server
                     peer = new Peer(null, {
@@ -169,9 +171,20 @@
                 // Start peer connection on click
                 connectButton.addEventListener('click', () => { join(idCall) });
 
+                function changeCamera() {
+                    if (indexExactCamera+1 >= listExactCamera.length) {
+                        indexExactCamera = 0
+                    } else {
+                        indexExactCamera++
+                    }
+                    initialize(listExactCamera[indexExactCamera]);
+                }
+
+                document.getElementById("change-camera").addEventListener('click', changeCamera);
+
                 // Since all our callbacks are setup, start the process of obtaining an ID
-                initialize();
-            })();
+                initialize(listExactCamera[indexExactCamera]);
+            })();            
         </script>
     </body>
 </html>
