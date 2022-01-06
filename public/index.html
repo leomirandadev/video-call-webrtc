@@ -182,11 +182,12 @@
 
                 navigator.mediaDevices.enumerateDevices().then((devices) => { devices.map(device => {
                     if (device.kind === "videoinput") {
-                        listExactCamera.append(device.deviceId);
+                        listExactCamera.push(device.deviceId);
                     }
-                })});
+                })}).then(() => initialize(listExactCamera[indexExactCamera]));
 
-                initialize(listExactCamera[indexExactCamera]);
+
+                // initialize(listExactCamera[indexExactCamera]);
             })();
 
             

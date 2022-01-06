@@ -22,12 +22,15 @@ let listExactCamera = [];
 
 function createStremLocalVideo(localVideoStream, exactCamera) {
 
-    alert(exactCamera)
     const getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-    const videoConfig = {
-        facingMode: {
-            exact: exactCamera
+    let videoConfig = true
+
+    if (exactCamera !== "") {
+        videoConfig = {
+            facingMode: {
+                exact: exactCamera
+            }
         }
     }
 
