@@ -187,7 +187,7 @@
                         if (device.kind === "videoinput") {
                             listExactCamera.push(device.deviceId);
                         }
-                    })}).then(() => initialize(listExactCamera[indexExactCamera]))
+                    })}).then(() => initialize(listExactCamera[indexExactCamera])).then(() => alert(SON.stringify(listExactCamera)))
                 , 2000)
 
 
