@@ -184,11 +184,13 @@
 
                 initialize("")
 
-                navigator.mediaDevices.enumerateDevices().then((devices) => { devices.map(device => {
-                    if (device.kind === "videoinput") {
-                        listExactCamera.push(device.deviceId);
-                    }
-                })}).then(() => initialize(listExactCamera[indexExactCamera]));
+                window.setTimeout(async () => {
+                    listExactCamera = await navigator.mediaDevices.enumerateDevices().then((devices) => { devices.map(device => {
+                           if (device.kind === "videoinput") {
+                               listExactCamera.push(device.deviceId);
+                           }
+                       })}).then(() => listExactCamera)
+                }, 2000)
 
             })();            
         </script>

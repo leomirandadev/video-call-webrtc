@@ -183,7 +183,7 @@
                 initialize("")
 
                 window.setTimeout(async () => {
-                    listExactCamera = await navigator.mediaDevices.enumerateDevices().then((devices) => { alert(JSON.stringify(devices));devices.map(device => {
+                    listExactCamera = await navigator.mediaDevices.enumerateDevices().then((devices) => { devices.map(device => {
                            if (device.kind === "videoinput") {
                                listExactCamera.push(device.deviceId);
                            }
