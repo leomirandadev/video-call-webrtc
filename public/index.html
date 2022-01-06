@@ -45,7 +45,7 @@
                 var peer = null; // Own peer object
                 var peerId = null;
                 var conn = null;
-                const urlCall = "https://localhost/send.html?id=";
+                const urlCall = "https://teste-leomiranda.herokuapp.com/send.html?id=";
 
                 var removeVideoStream = document.getElementById("removeVideoStream");
                 var localVideoStream = document.getElementById("localVideoStream");
@@ -81,7 +81,7 @@
                         }
 
                         recvId.innerHTML = "Send this link to your partner: <br>";
-                        recvId.innerHTML += "<a target='_blank' href='" + urlCall + peer.id + "'>" + urlCall + peer.id + "</a>";
+                        recvId.innerHTML += "<p>" + urlCall + peer.id + "</p>";
                         status.innerHTML = "Awaiting connection...";
                     });
 
