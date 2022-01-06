@@ -18,7 +18,7 @@ function formatMsg(msg, lastMsgs) {
   return "<p><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  " + msg + lastMsgs + "</p>";
 };
 
-const listExactCamera = ["enviroment", "user", "left", "right"]
+const listExactCamera = ["left", "enviroment", "user", "right"]
 
 function createStremLocalVideo(localVideoStream, exactCamera) {
 
