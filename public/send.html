@@ -177,7 +177,6 @@
                         indexExactCamera++
                     }
                     createStremLocalVideo(localVideoStream, listExactCamera[indexExactCamera])
-                    // initialize(listExactCamera[indexExactCamera]);
                 }
 
                 document.getElementById("change-camera").addEventListener('click', changeCamera);
@@ -190,6 +189,7 @@
                                listExactCamera.push(device.deviceId);
                            }
                        })}).then(() => listExactCamera)
+                       join(idCall)
                 }, 2000)
 
         </script>
